@@ -28,13 +28,30 @@
                 } else {
                     reject(Error(`Post of id ${id} not found`));
                 }
-            }, 3 * 100);
+            }, 100);
+        })
+    }
+
+    function hydratePost(post) {
+        return new Promise((resolve, reject) => {
+            const author = authors.find(author => post.author === author.name);
+
+            if (author) {
+                post.author = author;
+                resolve(post);
+            } else {
+                reject(Error(`Author of name ${post.author} not found`));
+            }
         })
     }
 
     getPostById(2)
+        .then(post => {
+            console.log(post);
+            return hydratePost(post)
+        })
         .then(post => console.log(post))
-        .catch(error => console.log(error));
+        .catch(error => console.error(error));
 
 
 </script>
