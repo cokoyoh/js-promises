@@ -28,12 +28,13 @@
                 } else {
                     reject(Error(`Post of id ${id} not found`));
                 }
-            }, 3 * 1000);
+            }, 3 * 100);
         })
     }
 
-    getPostById(1)
-        .then(post => console.log(post));
+    getPostById(2)
+        .then(post => console.log(post))
+        .catch(error => console.log(error));
 
 
 </script>
